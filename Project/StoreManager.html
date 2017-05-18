@@ -1,0 +1,144 @@
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>BestDeal.com:Online Sopping </title>
+		<link rel="stylesheet" href="style22.css" type="text/css" />
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</head>
+	<body>
+
+	<div id="header">																																																						<img src="images/logo.jpg" alt="" width="274" height="90" />	
+																																								
+	</div>
+		<section class="Encloser">
+
+		<div class="Title">
+			<h2>Welcome to Flight Management</h2>
+		</div>
+		
+		
+
+		<div style="float:left; width: 15%">
+		 
+			<aside class="sidebar">
+
+				 <button id="addProduct">Add Flight</button>
+				 <button id="delProduct">Delete Flight</button>
+				 <button id="updtProduct">Update Flight</button> 
+				 <a href="index.jsp"><button id="logout">Logout</button></a> 
+				 <input type="hidden" id="update_pid"></input>
+			</aside>
+
+		</div>
+		<div id='right_content' style="float:left;">
+		  
+		</div>
+
+
+		</section>
+<div id="footer">																																										<ul>
+			<li><a href="index.html">Home Page</a> |</li>
+			<li><a href="index2.html">About Company</a> |</li>                                                                                                      
+			<li><a href="index2.html">Services</a> |</li>
+			<li><a href="index2.html">Reviews</a> |</li>
+			<li><a href="index2.html">Contact us</a></li>
+		</ul>
+		<p>Copyright &copy;. All rights reserved. Design by Team 3</a></p>																																																			
+	</div>
+
+	</body>
+
+	<script>
+		$(document).on("click", "#delProduct", function() {
+			 $.ajax({
+				type: "POST",
+				data:{ reqtype: "show_delete", prodid : 0},
+				url: "productManager",
+				success: function(data){
+					$('#right_content').html(data);
+				}
+			});
+		});
+		
+		$(document).on("click", "#addProduct", showFormAdd);
+		$(document).on("click", "#updtProduct", function() {
+			 $.ajax({
+				type: "POST",
+				data:  { reqtype: "show_update", prodid : 0},
+				url: "productManager",
+				success: function(data){
+					$('#right_content').html(data);
+				}
+			});
+		});
+		
+		
+		function  showFormAdd()
+		{
+			$.get("addProduct.html", function(data){
+				$('#right_content').html(data);
+			});
+		}
+		function sequencer(prodid)
+		{
+			$.ajax({
+				   url:showFormUpdate(prodid),
+				   success:function(){
+				   getUpdateProductForm(prodid);
+				}
+				})
+		}
+		function  showFormUpdate(pid)
+		{
+			$.get("updateProduct.html", function(data){
+				$('#right_content').html(data);
+			});
+		}
+		
+		function deleteProduct(prodid)
+		{
+			$.ajax({
+				type: "POST",
+				data:  { reqtype: "delete_product", pid : prodid },
+				url: "productManager",
+				success: function(data){
+					$('#right_content').html(data);
+					$("#delProduct").click();
+				}
+			});
+		}
+		
+		function getUpdateProductForm(prodid)
+		{
+			$.ajax({
+				type: "POST",
+				data:  { reqtype: "get_product", pid : prodid },
+				url: "productManager",
+				success: function(pdata){
+						$("#Fid").val(pdata['FlightId']);
+						$("#Fsource").val(pdata['Source']);
+						$("#Fdestination").val(pdata['Destination']);
+						$("#Fdep").val(pdata['Departure']);
+						$("#Farrival").val(pdata['Arrival']);
+						$("#Ftype").val(pdata['Type']);
+						$("#Fcost").val(pdata['Cost']);
+						$("#Fcapacity").val(pdata['Capacity']);
+				}
+			});
+		}
+		function showall()
+		{
+			$.ajax({
+				type: "POST",
+				data:  { reqtype: "show_all", prodid : 0},
+				url: "productManager",
+				success: function(data){
+					$('#right_content').html(data);
+				}
+			});
+		}
+		showall();
+	</script>
+		
+</html>

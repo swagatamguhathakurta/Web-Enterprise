@@ -1,0 +1,63 @@
+
+My_SQL:
+
+Create Database:
+	
+	Create database BlueWings_DB
+
+use BlueWings_DB;
+
+create table Flight_Info
+	(
+	Fid varchar(5) PRIMARY KEY NOT NULL, 
+	Fsource varchar(100) NOT NULL, 
+	Fdestination varchar(100) NOT NULL,
+	Fdep varchar(40) NOT NULL,
+	Farrival varchar(40) NOT NULL, 
+	Ftype varchar(100) NOT NULL,
+	Fcost DECIMAL(8,3) NOT NULL,
+	Fcapacity INT NOT NULL
+	);
+
+
+
+
+Insert Statement:
+
+	INSERT INTO flight_info
+	(Fid,
+	Fsource,
+	Fdestination,
+	Fdep,
+	Farrival,
+	Ftype,
+	Fcost,
+	Fcapacity)
+	VALUES
+	("A121","Boston-Logan","Chicago-OHare","11:00 AM","01:30 PM","Domestic",360,150),
+	("A122","Chicago-OHare","Boston-Logan","09:30 AM","11:30 AM","Domestic",350,120),
+	("A123","Chicago-OHare","Boston-Logan","01:30 PM","03:30 PM","Domestic",389.20,150),
+	("A124","Boston-Logan","Chicago-OHare","05:30 PM","07:30 PM","Domestic",400.20,150),	
+	("A125","JohnF-Kennedy -NY","Chicago-OHare","06:30 AM","09:30 AM","Domestic",280,150),
+	("A126","Chicago-OHare","JohnF-Kennedy -NY","08:00 AM","11:30 AM","Domestic",270,150)
+	("A127","JohnF-Kennedy -NY","Chicago-OHare","05:30 PM","08:30 PM","Domestic",290,150),
+	("A128","Chicago-OHare","JohnF-Kennedy -NY","06:45 PM","10:15 PM","Domestic",270,150);
+	
+	
+	
+	-----------------------
+CREATE TABLE user_details
+(
+ Fname varchar(255), 
+ Lname varchar(255),  
+ email varchar(255),  
+ uname varchar(255) PRIMARY KEY, 
+ pass varchar(255), 
+ u_type varchar(255)
+ )
+ 
+ 
+ INSERT INTO User_Details VALUES ("Abignale","John","Abignale@gmail.com","user1","user1","CUST");
+  
+
+INSERT INTO User_Details VALUES ("Gladson","Noel","Admin@gmail.com","Admin","admin","STR_MGR");
